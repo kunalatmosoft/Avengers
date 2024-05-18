@@ -89,4 +89,4 @@ The build environment is where the source code is compiled, packaged, and prepar
 This document provides an overview of CORS, proxy servers, HTTP headers, HTTP status codes, and different software environments, helping to manage data flow between clients and servers effectively.
 
 
-wants to learn NEXT.js read this  [https://chatgpt.com/share/beaad888-4966-45d5-8e95-2a4f1da38f88](https://chatgpt.com/share/beaad888-4966-45d5-8e95-2a4f1da38f88)
+wants to learn NEXT.js read this  [NEXT.js](https://chatgpt.com/share/beaad888-4966-45d5-8e95-2a4f1da38f88)
