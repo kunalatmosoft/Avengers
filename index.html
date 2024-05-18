@@ -4,117 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MARVEL&trade;</title>
-    <style>
-    body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-h1 {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-/* Add these styles to your existing CSS */
-.search-container {
-    text-align: center;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.search-container input[type="text"] {
-    padding: 10px;
-    width: 300px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Initially no box-shadow */
-}
-
-.search-container input[type="text"]:focus {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add box-shadow on focus */
-}
-
-.search-container input[type="text"]::placeholder {
-    color: #999; /* Placeholder color */
-}
-
-/* Animation for the input box */
-.search-container input[type="text"] {
-    animation: slideIn 0.5s forwards; /* Animation for sliding in */
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.card {
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card-header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-    font-weight: bold;
-    border-bottom: 1px solid #ddd;
-}
-
-.card-body {
-    padding: 15px;
-    flex-grow: 1;
-}
-
-.card-body p {
-    margin: 5px 0;
-    color: #333;
-}
-
-@media only screen and (max-width: 768px) {
-    .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
-    </style>
-</head>
-<body>
-    <h1>MARVEL&trade;</h1>
-    <div class="search-container">
-        <input type="text" id="hero-search" placeholder="Search for a hero...">
-    </div>
-    <div class="grid-container" id="superheroes-grid">
-        <!-- Data will be inserted here -->
-    </div>
-
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+    
+            h1 {
+                text-align: center;
+                margin-top: 20px;
+            }
+    
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 20px;
+            }
+    
+            .search-container {
+                text-align: center;
+                margin-bottom: 20px;
+                position: relative;
+            }
+    
+            .search-container input[type="text"] {
+                padding: 10px;
+                width: 300px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Initially no box-shadow */
+            }
+    
+            .search-container input[type="text"]:focus {
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add box-shadow on focus */
+            }
+    
+            .search-container input[type="text"]::placeholder {
+                color: #999; /* Placeholder color */
+            }
+    
+            /* Animation for the input box */
+            .search-container input[type="text"] {
+                animation: slideIn 0.5s forwards; /* Animation for sliding in */
+            }
+    
+            @keyframes slideIn {
+                from {
+                    transform: translateX(-100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+    
+            .card {
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                overflow: hidden;
+                transition: transform 0.3s ease;
+                display: flex;
+                flex-direction: column;
+            }
+    
+            .card:hover {
+                transform: translateY(-5px);
+            }
+    
+            .card-header {
+                background-color: #007bff;
+                color: #fff;
+                padding: 15px;
+                text-align: center;
+                font-weight: bold;
+                border-bottom: 1px solid #ddd;
+            }
+    
+            .card-body {
+                padding: 15px;
+                flex-grow: 1;
+            }
+    
+            .card-body p {
+                margin: 5px 0;
+                color: #333;
+            }
+    
+            @media only screen and (max-width: 768px) {
+                .grid-container {
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                }
+            }
+    
+        </style>
+    </head>
+    <body>
+        <h1>MARVEL&trade;</h1>
+        <div class="search-container">
+            <input type="text" id="hero-search" placeholder="Search for a hero...">
+        </div>
+        <div class="grid-container" id="superheroes-grid">
+            <!-- Data will be inserted here -->
+        </div>
+    
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center" id="pagination">
+            <!-- Pagination items will be inserted here dynamically -->
+          </ul>
+        </nav>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
