@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemsPerPage = 10;
     let currentPage = 1;
     let jsonData = [];
+    let team = [];
 
     // Fetching data and populating grid
     fetch(proxyUrl + encodeURIComponent(apiUrl))
@@ -46,6 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
         rolePara.textContent = `Role: ${hero.role}`;
         cardBody.appendChild(rolePara);
 
+        const addToTeamDiv = document.createElement('div');
+        addToTeamDiv.classList.add('add-to-team');
+
+        const addToTeamButton = document.createElement('button');
+        addToTeamButton.textContent = 'Add to Team';
+        addToTeamButton.addEventListener('click', () => addToTeam(hero));
+        addToTeamDiv.appendChild(addToTeamButton);
+
+        cardBody.appendChild(addToTeamDiv);
         card.appendChild(cardBody);
         return card;
     }
@@ -133,6 +143,57 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             pageItems[pageItems.length - 1].classList.remove('disabled');
         }
+    }
+
+    // Function to add a hero to the team
+    function addToTeam(hero) {
+        if (!team.some(member => member.id === hero.id)) {
+            team.push(hero);
+            showAlert(`${hero.name} has been added to your team!`, 'success');
+        } else {
+            showAlert(`${hero.name} is already in your team!`, 'warning');
+        }
+        updateTeamView();
+    }
+
+    // Function to show alert
+    function showAlert(message, type) {
+        const alertContainer = document.createElement('div');
+        alertContainer.className = `alert alert-${type} alert-dismissible fade show`;
+        alertContainer.role = 'alert';
+        alertContainer.innerHTML = `
+            ${message}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        `;
+        const gridContainer = document.getElementById('superheroes-grid');
+        gridContainer.prepend(alertContainer); // Append the alert to the top of the grid container
+
+        setTimeout(() => {
+            alertContainer.classList.remove('show');
+            alertContainer.addEventListener('transitionend', () => alertContainer.remove());
+        }, 3000);
+    }
+
+    // Function to update team view in the modal
+    function updateTeamView() {
+        const teamContainer = document.getElementById('team-container');
+        teamContainer.innerHTML = '';
+        team.forEach(hero => {
+            const card = createCard(hero);
+            const removeFromTeamButton = document.createElement('button');
+            removeFromTeamButton.textContent = 'Remove from Team';
+            removeFromTeamButton.addEventListener('click', () => removeFromTeam(hero));
+            card.querySelector('.card-body').appendChild(removeFromTeamButton);
+            teamContainer.appendChild(card);
+        });
+    }
+
+    // Function to remove a hero from the team
+    function removeFromTeam(hero) {
+        team = team.filter(member => member.id !== hero.id);
+        updateTeamView();
     }
 
     // Search functionality
@@ -227,75 +288,11 @@ document.addEventListener('DOMContentLoaded', () => {
             pageItems[pageItems.length - 1].classList.remove('disabled');
         }
     }
-});
 
-
-
-/* document.addEventListener('DOMContentLoaded', () => {
-    const proxyUrl = 'https://api.allorigins.win/get?url=';
-    const apiUrl = 'https://apkp.vercel.app/ap/data';
-
-    // Fetching data and populating grid
-    fetch(proxyUrl + encodeURIComponent(apiUrl))
-        .then(response => response.json())
-        .then(data => {
-            const jsonData = JSON.parse(data.contents);  // Parse the JSON string from the proxy
-            const gridContainer = document.getElementById('superheroes-grid');
-            jsonData.forEach(hero => {
-                const card = createCard(hero);
-                gridContainer.appendChild(card);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching the data:', error);
-        });
-
-    // Function to create card for a hero
-    function createCard(hero) {
-        const card = document.createElement('div');
-        card.classList.add('card');
-
-        const cardHeader = document.createElement('div');
-        cardHeader.classList.add('card-header');
-        cardHeader.textContent = hero.name;
-        card.appendChild(cardHeader);
-
-        const cardBody = document.createElement('div');
-        cardBody.classList.add('card-body');
-
-        const idPara = document.createElement('p');
-        idPara.textContent = `ID: ${hero.id}`;
-        cardBody.appendChild(idPara);
-
-        const emailPara = document.createElement('p');
-        emailPara.textContent = `Email: ${hero.email}`;
-        cardBody.appendChild(emailPara);
-
-        const contactPara = document.createElement('p');
-        contactPara.textContent = `Contact: ${hero.contact}`;
-        cardBody.appendChild(contactPara);
-
-        const rolePara = document.createElement('p');
-        rolePara.textContent = `Role: ${hero.role}`;
-        cardBody.appendChild(rolePara);
-
-        card.appendChild(cardBody);
-        return card;
-    }
-
-    // Search functionality
-    const searchInput = document.getElementById('hero-search');
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            const heroName = card.querySelector('.card-header').textContent.toLowerCase();
-            if (heroName.includes(searchTerm)) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+    // Show team modal
+    const viewTeamButton = document.getElementById('view-team');
+    viewTeamButton.addEventListener('click', () => {
+        const teamModal = new bootstrap.Modal(document.getElementById('teamModal'));
+        teamModal.show();
     });
 });
- */
